@@ -3,7 +3,7 @@ const express = require("express");
 
 
 const { getAllArticles , getArticlesByAuthor,
-     getArticleById, createNewArticle , updateArticleById } = require("../controllers/articles");
+     getArticleById, createNewArticle , updateArticleById ,deleteArticleById} = require("../controllers/articles");
 
 
 // create articles router
@@ -19,6 +19,8 @@ articlesRouter.get("/search_2" , getArticleById)
 articlesRouter.post("/" , createNewArticle)
 
 articlesRouter.put("/:id" , updateArticleById )
+
+articlesRouter.delete("/:id" , deleteArticleById)
 
 
 

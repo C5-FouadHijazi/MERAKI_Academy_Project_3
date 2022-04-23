@@ -48,9 +48,35 @@ const createNewArticle = (req ,res) =>{
     res.json(found)
   } 
 
-
+  
+  const deleteArticleById = (req ,res) => {
+    let deletedItem = {};
+    let i;
+    console.log(req.params.id);
+    const found = articles.find((element, index) => {
+      i = index;
+      return element.id == req.params.id;
+    });
+    if (found) {
+      deletedItem = articles[i];
+      articles.splice(i, 1)
+      res.status(200);
+      res.json({
+        success: true,
+        message: `Succeeded to delete article with id: ${req.params.id}`,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: `Failed to delete article with id:_${req.params.id}`,
+      });
+      console.log("not found");
+    }
+  }
   
 
+
+ 
 
 module.exports = {
   getAllArticles,
@@ -58,4 +84,5 @@ module.exports = {
   getArticleById,
   createNewArticle,
   updateArticleById,
+  deleteArticleById,
 };
