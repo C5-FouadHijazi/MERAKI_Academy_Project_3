@@ -3,7 +3,7 @@ const express = require("express");
 
 
 const { getAllArticles , getArticlesByAuthor,
-     getArticleById, createNewArticle } = require("../controllers/articles");
+     getArticleById, createNewArticle , updateArticleById } = require("../controllers/articles");
 
 
 // create articles router
@@ -16,7 +16,9 @@ articlesRouter.get("/search_1" , getArticlesByAuthor)
 
 articlesRouter.get("/search_2" , getArticleById)
 
-articlesRouter.post("/articles" , createNewArticle)
+articlesRouter.post("/" , createNewArticle)
+
+articlesRouter.put("/:id" , updateArticleById )
 
 
 

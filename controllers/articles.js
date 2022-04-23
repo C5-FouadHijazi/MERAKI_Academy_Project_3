@@ -19,7 +19,7 @@ res.json(found)
 
 const getArticleById = (req,res) =>{
   const found = articles.filter((element ,index)=>{
-    return element.id === req.query.id
+    return element.id == req.query.id
   })
   res.status(200)
   res.json(found)
@@ -34,7 +34,22 @@ const createNewArticle = (req ,res) =>{
   articles.push(newarticle)
   res.status(201)
   res.json(newarticle)
-}
+} 
+
+ const updateArticleById = (req ,res) => {
+  const found = articles.find((element, index)=>{
+    return element.id == req.params.id
+  })
+    found.author = req.body.author 
+    found.title = req.body.title 
+    found.description = req.body.description
+    
+    res.status(200)
+    res.json(found)
+  } 
+
+
+  
 
 
 module.exports = {
@@ -42,4 +57,5 @@ module.exports = {
   getArticlesByAuthor,
   getArticleById,
   createNewArticle,
+  updateArticleById,
 };
