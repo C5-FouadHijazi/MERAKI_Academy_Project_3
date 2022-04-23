@@ -15,8 +15,20 @@ res.json(found)
 }
 
 
+const getArticleById = (req,res) =>{
+  const found = articles.filter((element ,index)=>{
+    return element.id === req.query.id
+  })
+  res.status(200)
+  res.json(found)
+  }
+
+
+
+
 
 module.exports = {
   getAllArticles,
-  getArticlesByAuthor
+  getArticlesByAuthor,
+  getArticleById,
 };
