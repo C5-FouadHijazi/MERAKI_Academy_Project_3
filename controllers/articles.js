@@ -39,7 +39,7 @@ const createNewArticle = (req ,res) =>{
  const updateArticleById = (req ,res) => {
   const found = articles.find((element, index)=>{
     return element.id == req.params.id
-  })
+  }) 
     found.author = req.body.author 
     found.title = req.body.title 
     found.description = req.body.description
@@ -55,7 +55,7 @@ const createNewArticle = (req ,res) =>{
     console.log(req.params.id);
     const found = articles.find((element, index) => {
       i = index;
-      return element.id == req.params.id;
+      return element.id == req.body.id;
     });
     if (found) {
       deletedItem = articles[i];
@@ -76,24 +76,23 @@ const createNewArticle = (req ,res) =>{
   
 
   const deleteArticlesByAuthor = (req ,res) => {
-    let deletedItem = {};
-    let i;
-    const found = articles.find((element, index) => {
-      i = index;
-      return element.author === req.params.author;
+    //let deletedItem = {};
+    //let i;
+    //const found and using find //??
+    articles = articles.filter((element, index) => {
+      //i = index;
+      return element.author !== req.body.author;
     });
-    if (found) {
-      deletedItem = articles[i];
-      articles.splice(i, 1)
+    if (articles) {
       res.status(200);
       res.json({
         success: true,
-        message: `Succeeded to delete article with id: ${req.params.id}`,
+        message: `Succeeded to delete article with id: ${req.body.id}`,
       });
     } else {
       res.status(404).json({
         success: false,
-        message: `Failed to delete article with id:_${req.params.id}`,
+        message: `Failed to delete article with id:_${req.body.id}`,
       });
       console.log("not found");
     }
