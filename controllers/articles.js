@@ -9,8 +9,9 @@ const getAllArticles = (req, res) => {
 
 
 const getArticlesByAuthor = (req , res) =>{ 
+  const author = req.query.author
 const found = articles.filter((element ,index)=>{
-  return element.author === req.query.author
+  return element.author === author
 })
 res.status(200)
 res.json(found)
@@ -18,19 +19,18 @@ res.json(found)
 
 
 const getArticleById = (req,res) =>{
+  const id = req.query.id
   const found = articles.filter((element ,index)=>{
-    return element.id == req.query.id
+    return element.id == id
   })
   res.status(200)
   res.json(found)
   }
 
-  /*{"title": "server",
-"description": "Lorem , Quam ,mollitita",
-"author": "Soso"}*/
 
 const createNewArticle = (req ,res) =>{
-  const newarticle = { id: uuid(),  title: req.body.title ,description: req.body.description , author: req.body.author}
+  const {title,description,author} = req.body
+  const newarticle = { id: uuid(),  title ,description , author}
   articles.push(newarticle)
   res.status(201)
   res.json(newarticle)
@@ -40,9 +40,9 @@ const createNewArticle = (req ,res) =>{
   const found = articles.find((element, index)=>{
     return element.id == req.params.id
   }) 
-    found.author = req.body.author 
-    found.title = req.body.title 
-    found.description = req.body.description
+    found.author = req.body.author  || found.author
+    found.title = req.body.title || found.title
+    found.description = req.body.description || found.description
     
     res.status(200)
     res.json(found)
@@ -76,11 +76,7 @@ const createNewArticle = (req ,res) =>{
   
 
   const deleteArticlesByAuthor = (req ,res) => {
-    //let deletedItem = {};
-    //let i;
-    //const found and using find //??
     articles = articles.filter((element, index) => {
-      //i = index;
       return element.author !== req.body.author;
     });
     if (articles) {
