@@ -9,6 +9,12 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true, unique: true },
   });
 
+  userSchema.pre("save",function(){
+
+    this.email=this.email.toLowerCase()
+    })
+    
+
 
   const user = mongoose.model("User", userSchema);
 

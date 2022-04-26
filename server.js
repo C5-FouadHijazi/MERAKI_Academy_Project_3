@@ -3,10 +3,10 @@ const app = express();
 
 app.use(express.json());
 
-// import  DataBase
+// import  DataB
 const db = require("./models/db");
 
-// import  Routers 
+// import  Routers
 const articlesRouter = require("./routes/articels");
 
 const usersRouter = require("./routes/user");
