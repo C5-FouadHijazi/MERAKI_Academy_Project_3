@@ -5,6 +5,7 @@ let userModule = require("../models/userSchema");
 let commentModule = require("../models/commentSchema");
 
 let articleModule = require("../models/articleSchema");
+const article = require("../models/articleSchema");
 
 const register = (req, res) => {
   const { firstName, lastName, age, country, email, password } = req.body;
@@ -32,9 +33,7 @@ const register = (req, res) => {
         message: "The email already exists",
         err :"error "
     })
-    }
-  
-    console.log(err.keyPattern);
+    };
     res.status(404).json({
       success: false,
       message: "Server Error",
@@ -49,17 +48,15 @@ const register = (req, res) => {
   "author" : "626704538c32c8eac0050ea6"
 } */
 
-const createNewArticle = (req, res) => 
-{
-  const { title, description, author } = req.body;
-  const newUser = new articleModule({
-    title,
-    description,
-    author,
-
+const createNewArticle = (req, res) => {
+  const author = req.quyery.author
+  author.find()
+ const logInUser = new userModule({
+  title,
+  description,
+  author,
   });
-
-  newUser
+  logInUser
   .save()
   .then((result) => {
     res.status(201).json({
@@ -76,6 +73,24 @@ const createNewArticle = (req, res) =>
   });
 }
 
+const getAllArticles = (req,res)=>{
+  userModule
+  .find({})
+  .then((result) => {
+    res.status(200).json({
+      success: true,
+      message: "All the articles",
+      author: [result]
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      err: "error message"
+    });
+  });
+}
 
 
 
@@ -87,4 +102,5 @@ const createNewArticle = (req, res) =>
 module.exports = {
   register,
   createNewArticle,
+  getAllArticles,
 }

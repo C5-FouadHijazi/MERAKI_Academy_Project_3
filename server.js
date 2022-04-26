@@ -7,16 +7,16 @@ app.use(express.json());
 const db = require("./models/db");
 
 // import  Routers
-const articlesRouter = require("./routes/articels");
+/* const articlesRouter = require("./routes/articels"); */
 
 const usersRouter = require("./routes/user");
-
+const articlesRouter = require("./routes/user"); 
 
 //The Routers
-app.use("/articles", articlesRouter);
-
 
 app.use("/users", usersRouter);
+
+app.use("/articles", articlesRouter);
 
 
 const PORT = 5000;
