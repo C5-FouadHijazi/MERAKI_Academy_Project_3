@@ -193,6 +193,38 @@ const updateArticleById = (req, res) => {
 }
 
 
+//P2.A] 6.deleteArticleById
+const deleteArticleById = (req , res) =>{
+  const deletedId = req.params.id
+  const { title,description, author } = req.body
+  articleModule.findOneAndDelete({_id: deletedId})
+  .then((result) => {
+    if (result === null ){
+      res.status(404).json({
+        success: false,
+        message: `The article with id ⇾ ${deletedId} is not found`
+      })
+    }else{
+      res.status(201).json({
+        success: true,
+        message: "Article deleted",
+      });
+    }
+  
+  })
+  .catch((err) => {
+    res.status(500).send({
+      success: false,
+      message: "Server Error",
+      err: "error message"
+    });
+  });
+}
+
+
+//deleteMany
+
+
 
 
 module.exports = {
@@ -202,4 +234,5 @@ module.exports = {
   getArticlesByAuthor,
   getArticleById,
   updateArticleById,
+  deleteArticleById,
 }
