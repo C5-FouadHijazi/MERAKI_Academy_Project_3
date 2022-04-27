@@ -92,7 +92,7 @@ const getAllArticles = (req,res)=>{
     res.status(500).json({
       success: false,
       message: "Server Error",
-      err: "error message"
+      err: err.message,
     });
   });
 }
@@ -104,15 +104,15 @@ const getArticlesByAuthor = (req,res)=>{
   articleModule
   .find({author: serchauthor})
   .then((result) => {
-    if (result.length !== 0){
+    if (result !== null){
       res.status(404).json({
         success: false,
-        message: `The author => ${authorId} has no articles`,
+        message: `The author => ${serchauthor} has no articles`,
       })
     }else{
       res.status(200).json({
         success: true,
-        message: `All the articles for the author → ${authorId}`,
+        message: `All the articles for the author → ${serchauthor}`,
         articles : [result]
       });
     }
@@ -136,7 +136,7 @@ const getArticleById = (req,res)=>{
   .find({ _id : serchID })
   .then((result) => {
     console.log(result.length);
-    if (result.length === 0){
+    if (result === null){
       res.status(404).send({
         success: false,
         message: "The article is not found"
@@ -145,7 +145,39 @@ const getArticleById = (req,res)=>{
       console.log("heeeelpppp");
       res.status(200).send({
         success: true,
-        message: `The article with id ⇾ ${articlesId}`,
+        message: `The article with id ⇾ ${serchID}`,
+        articles : result,
+      });
+    }
+  
+  })
+  .catch((err) => {
+    res.status(500).send({
+      success: false,
+      message: "Server Error",
+      err: "error message"
+    });
+  });
+}
+
+
+
+//P2.A] 5.updateArticleById 
+const updateArticleById = (req, res) => {
+  const updatedbyId = req.params.id
+  const { title,description, author } = req.body
+  articleModule.findByIdAndUpdate({_id: updatedbyId} ,{ title ,description, author},{new : true})
+  .then((result) => {
+    if (result === null ){
+      res.status(404).json({
+        success: false,
+        message: "The article is not found"
+      })
+    }else{
+      console.log("heeeelpppp");
+      res.status(201).json({
+        success: true,
+        message: "Article updated",
         articles : result,
       });
     }
@@ -169,4 +201,5 @@ module.exports = {
   getAllArticles,
   getArticlesByAuthor,
   getArticleById,
+  updateArticleById,
 }
