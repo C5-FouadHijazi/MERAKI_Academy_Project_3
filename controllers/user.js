@@ -181,7 +181,6 @@ const updateArticleById = (req, res) => {
         articles : result,
       });
     }
-  
   })
   .catch((err) => {
     res.status(500).send({
@@ -251,6 +250,35 @@ const deleteArticlesByAuthor = (req , res) =>{
   });
 }
 
+const login = (req, res) => {
+  const { email,password,  } = req.body
+  userModule.findOne({email,password})
+  .then((result) => {
+    if (result.email === req.body.email && result.password ===req.body.password) {
+      res.status(200).json({
+        success: true,
+        message: `Valid login Credentials`,
+      })
+    } else {
+      res.status().json({
+        success: false,
+        message: "Invalid login Credentials",
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(404).send({
+      success: false,
+      message: "Server Error",
+      err: "error message"
+    });
+  });
+}
+
+
+
+
+
 
 module.exports = {
   register,
@@ -260,5 +288,6 @@ module.exports = {
   getArticleById,
   updateArticleById,
   deleteArticleById,
-  deleteArticlesByAuthor
+  deleteArticlesByAuthor,
+  login
 }
