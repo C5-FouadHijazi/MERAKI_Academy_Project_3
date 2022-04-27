@@ -222,9 +222,34 @@ const deleteArticleById = (req , res) =>{
 }
 
 
-//deleteMany
 
-
+//P2.A] 7.deleteArticleById
+const deleteArticlesByAuthor = (req , res) =>{
+  const deleteauthor = req.query.author
+  const { title,description, author } = req.body
+  articleModule.deleteMany({author: deleteauthor})
+  .then((result) => {
+    if (result === null ){
+      res.status(404).json({
+        success: false,
+        message:  "No articles for this author "
+      })
+    }else{
+      res.status(200).json({
+        success: true,
+        message: `Deleted articles for the author => ${deleteauthor} `,
+      });
+    }
+  
+  })
+  .catch((err) => {
+    res.status(500).send({
+      success: false,
+      message: "Server Error",
+      err: "error message"
+    });
+  });
+}
 
 
 module.exports = {
@@ -235,4 +260,5 @@ module.exports = {
   getArticleById,
   updateArticleById,
   deleteArticleById,
+  deleteArticlesByAuthor
 }
