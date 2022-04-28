@@ -1,4 +1,4 @@
-let articles = [
+/* let articles = [
     {
       id: 1,
       title: "How I learn coding?",
@@ -22,4 +22,4 @@ let articles = [
 
 
   module.exports = articles;
-  
+   */
