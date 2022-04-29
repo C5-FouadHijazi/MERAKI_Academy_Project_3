@@ -1,7 +1,8 @@
 const express = require("express");
 
-const { getAllArticles,getArticleByAuthor ,getArticleByID,createNewArticle,updateArticleById ,deleteArticleById,deleteArticlesByAuthor,createNewComment} = require("../controllers/articles");
+const { getAllArticles,getArticleByAuthor ,getArticleByID,createNewArticle,updateArticleById ,deleteArticleById,deleteArticlesByAuthor,createNewComment,} = require("../controllers/articles");
 
+const {authentication } = require("../middlewares/auth")
  
 // create articles router
 const articlesRouter = express.Router();
@@ -10,15 +11,18 @@ const articlesRouter = express.Router();
 // endpoint for the GET request
 articlesRouter.get("/", getAllArticles);
 
-articlesRouter.get("/search-1", getArticleByAuthor);
+articlesRouter.get("/search_1", getArticleByAuthor);
 
-articlesRouter.get("/search-2", getArticleByID);
+articlesRouter.get("/search_2", getArticleByID);
 
-articlesRouter.post("/", createNewArticle);
+articlesRouter.post("/", authentication ,createNewArticle);
+
 articlesRouter.put("/:id", updateArticleById);
+
 articlesRouter.delete("/:id", deleteArticleById);
 
 articlesRouter.delete("/", deleteArticlesByAuthor);
+
 articlesRouter.post("/:article_id/comments", createNewComment);
 
 module.exports = articlesRouter

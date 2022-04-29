@@ -63,7 +63,7 @@ const login = (req, res) => {
         } else {
           res.status(401).json({
             success: false,
-            message: "The password you’ve entered is incorrect",
+            message: "Valid login credentials",
           });
         }
       });
