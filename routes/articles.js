@@ -9,7 +9,7 @@ const articlesRouter = express.Router();
 
  
 // endpoint for the GET request
-articlesRouter.get("/", getAllArticles);
+articlesRouter.get("/",authentication, getAllArticles);
 
 articlesRouter.get("/search_1", getArticleByAuthor);
 
