@@ -23,6 +23,6 @@ articlesRouter.delete("/:id", deleteArticleById);
 
 articlesRouter.delete("/", deleteArticlesByAuthor);
 
-articlesRouter.post("/:article_id/comments", createNewComment);
+articlesRouter.post("/:article_id/comments",authentication ,createNewComment);
 
 module.exports = articlesRouter
