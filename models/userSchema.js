@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 
+const bcrypt = require("bcrypt");
+
+const jwt = require("jsonwebtoken");
+
 const userSchema = new mongoose.Schema({
     firstName: { type: String },
     lastName: { type: String },
@@ -9,8 +13,8 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
   });
 
-/* JO9DHBHO0110000178334600105001
- *//*   {
+  /* JO9DHBHO0110000178334600105001
+  *//*   {
     "fisrtName" : "Maies",
     "lastName" : "Hijazi",
     "age" : 32,
@@ -20,23 +24,13 @@ const userSchema = new mongoose.Schema({
     } */
     
 //*P3.A Login [Level 2]
-  userSchema.pre("save",function(){
-//hash
-const hashFun = async (password) => {
-  console.log(password);
-  const salt = 10;
-
-  const hashedPassword = await bcrypt.hash(password, salt);
- 
-  bcrypt.compare(password, hashedPassword, (err, result) => {
-    console.log("compare result: ", result);
-  });
-}; 
+  userSchema.pre("save",async function(){
+    const salt = 10;
+  const hashpassword= await bcrypt.hash( this.password, salt);
     this.email=this.email.toLowerCase()
-    })
+    this.password=hashpassword
+})
 
-  const user = mongoose.model("User", userSchema);
 
-
-  module.exports = user
-  
+const user = mongoose.model("User", userSchema);
+module.exports = user

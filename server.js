@@ -32,7 +32,7 @@ app.use("/articles", articlesRouter);
 
 
 
-const PORT = 8000;
+const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`SERVER LISTENING AT http://localhost:${PORT}`);
 });

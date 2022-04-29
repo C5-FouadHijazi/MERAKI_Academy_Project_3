@@ -1,6 +1,9 @@
 const articleModel = require("../models/articleSchema");
 const commentModel = require("../models/commentSchema");
 
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 //**P2.A] 2.getAllArticles
 const getAllArticles = (req, res) => {
   articleModel
@@ -328,7 +331,7 @@ const deleteArticlesByAuthor = (req, res) => {
 };
 
 
-//**P2.B] 3.deleteArticlesByAuthor
+//**P2.B] 7.createNewComment
 const createNewComment = (req, res) => {
   const { comment, commenter } = req.body;
   const newComment = new commentModel({
@@ -341,7 +344,6 @@ const createNewComment = (req, res) => {
     .then((result) => {
       console.log(result); //result=>(newComment)
       res.status(201).json(result);
-
       articleModel
         .findByIdAndUpdate(
           { _id: req.params.article_id },
@@ -353,9 +355,14 @@ const createNewComment = (req, res) => {
     })
     .catch((err) => {
       res.status(500);
-      res.json({ massage: "server error", err: err.message });
+      res.json({ 
+        massage: "server error",
+         err: err.message });
     });
 };
+
+
+
 
 
 
