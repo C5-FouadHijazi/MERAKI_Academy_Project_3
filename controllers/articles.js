@@ -110,7 +110,7 @@ const getArticleByID = (req, res) => {
  */
 /////////////////////////////////////
 
-//**P2.A] 1.createNewArticle
+//**P3.A] 4.createNewArticle [Level 2]
 const createNewArticle = (req, res) => {
   const { title, description, author } = req.body;
   const newArticle = new articleModel({
