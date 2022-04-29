@@ -41,6 +41,7 @@ const register = (req, res) => {
 const login = (req, res) => {
   userModel
     .find({ email: req.body.email })
+    .populate("role")
     .then((result) => {
       console.log(result[0].password);
       const hashpassword = result[0].password;
@@ -51,6 +52,7 @@ const login = (req, res) => {
           const payload = {
             userId: result[0]._id,
             country: result[0].country,
+            role : result.role
           };
           const options = {
             expiresIn: "1h",
