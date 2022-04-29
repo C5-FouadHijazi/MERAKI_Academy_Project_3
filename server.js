@@ -20,13 +20,17 @@ app.use(express.json());
 /* const articlesRouter = require("./routes/articels"); */
 
 const usersRouter = require("./routes/users");
-const articlesRouter = require("./routes/articles"); 
+const articlesRouter = require("./routes/articles");
+
+const roleRouter = require("./routes/role");
 
 //The Routers
 
 app.use("/users", usersRouter);
 
 app.use("/articles", articlesRouter);
+
+app.use("/role", roleRouter);
 
 
 
