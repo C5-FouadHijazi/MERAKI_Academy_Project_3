@@ -7,7 +7,7 @@ const userModel = require("../models/userSchema");
 
 //**P2.B] 2.const register [Level 1]
 const register = (req, res) => {
-  const { firstName, lastName, age, country, email, password } = req.body;
+  const { firstName, lastName, age, country, email, password , role } = req.body;
   const newUser = new userModel({
     firstName,
     lastName,
@@ -15,6 +15,7 @@ const register = (req, res) => {
     country,
     email,
     password,
+    role
   });
   newUser
     .save()
