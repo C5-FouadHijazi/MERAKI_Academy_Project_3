@@ -6,12 +6,8 @@ import { tokenContext } from "../../App";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-
-  const [message, setMessage] = useState("");
-  const [islogin, setIslogin] = useState(false);
-
-  const [token, setToken] = useContext(tokenContext).token; 
+  const { token, settoken, islogin, setIslogin, message, setMessage } =
+    useContext(tokenContext);
 
   const LogIN = () => {
     axios
@@ -22,11 +18,11 @@ const Login = () => {
 
       .then((result) => {
         console.log(result);
-/*         setToken(result.data.token); */
+        settoken(result.data.token);
         setIslogin(true);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        console.log(err.response);
         setMessage(err.response.data.message);
         setIslogin(false);
       });
@@ -34,7 +30,6 @@ const Login = () => {
 
   return (
     <div>
-      
       <p>Login</p>
 
       <input

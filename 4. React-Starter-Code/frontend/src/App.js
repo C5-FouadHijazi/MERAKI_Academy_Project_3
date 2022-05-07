@@ -12,10 +12,12 @@ export const tokenContext = createContext();
 const App = () => {
   const [login, isLoggedIn] = useState(false);
   const [token, setToken] = useState("");
+  const [message, setMessage] = useState("");
+  const [islogin, setIslogin] = useState(false);
 
   return (
     <div className="App">
-      <tokenContext.Provider value={{ token, setToken, login, isLoggedIn }}>
+      <tokenContext.Provider value={{ token, setToken, login, isLoggedIn, message, setMessage ,islogin,setIslogin}}>
         <h1>Welcome To APP</h1>
 
         <Navbar />
