@@ -15,7 +15,7 @@ const Navbar = () => {
     
       {islogin === true ? (
         <>
-          <Link to="/Dashboard">Dashboard</Link>
+          <Link to="/dashbord">Dashboard</Link>
           <Link to="/addnewarticle">Add New Article</Link>
           <Link to="/Logout">Logout</Link>
         </> ) : (<>

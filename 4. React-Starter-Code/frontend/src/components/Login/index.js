@@ -9,31 +9,28 @@ const Login = () => {
   const { token, setToken, islogin, setIslogin, message, setMessage } =
     useContext(tokenContext);
 
-
   const LogIN = () => {
     axios
       .post("http://localhost:5000/login/", {
-        email:email,
-        password:password,
+        email: email,
+        password: password,
       })
 
       .then((result) => {
-        // console.log(result.data.token);
         localStorage.setItem("token", result.data.token);
-        setToken(localStorage.getItem("token"));
-        // console.log(islogin);
+        setToken(result.data.token);
         setIslogin(true);
+        //clg -> token in ls
         console.log(setIslogin);
-      }).catch((err)=>{
-        console.log(err.data);
       })
-      
+      .catch((err) => {
+        console.log(err.data);
+      });
   };
 
   return (
-
     <div>
-      <p>Login</p>
+      <p>Login:</p>
 
       <input
         type={"text"}
@@ -54,7 +51,7 @@ const Login = () => {
       <br />
       <button onClick={LogIN}>Login</button>
 
-      <p className={islogin ? "successful" : "error Try Again"}>{message}</p>
+      <p className={islogin ? "successful" : "error"}>{message}</p>
     </div>
   );
 };

@@ -1,18 +1,17 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import "./style.css";
-
+/* import "../../../../backend/controllers/articles"; */
 import { tokenContext } from "../../App";
 
 const AddArticle = () => {
+  const { token, setToken } = useContext(tokenContext);
 
-  const {token,setToken} = useContext(tokenContext);
-   
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
-  
-  setToken(localStorage.getItem("token"))
+
+  setToken(localStorage.getItem("token"));
 
   const creatNewArticle = () => {
     axios
@@ -32,18 +31,15 @@ const AddArticle = () => {
       .then((result) => {
         console.log(result.data);
         setMessage(result.data.message);
-
-
       })
       .catch((err) => {
-        console.log(err.response.data.message);
         setMessage(err.response.data.message);
       });
   };
 
   return (
     <div>
-      <p> AddArticle</p>
+      <p> AddArticle:</p>
 
       <input
         type={"text"}
@@ -53,14 +49,13 @@ const AddArticle = () => {
         }}
       />
       <br />
-      <textarea   type={"text"}
+      <textarea
+        type={"text"}
         placeholder={"Description"}
-        onChange=
-        {(e) => {
+        onChange={(e) => {
           setDescription(e.target.value);
-        }}>
-      
-      </textarea>
+        }}
+      ></textarea>
 
       <br />
 

@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 import Register from "./components/Register";
@@ -7,7 +7,7 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Dashbord from "./components/Dashboard";
 
-import AddArticle from "./components/AddArticle"
+import AddArticle from "./components/AddArticle";
 
 export const tokenContext = createContext();
 
@@ -16,6 +16,20 @@ const App = () => {
   const [token, setToken] = useState("");
   const [message, setMessage] = useState("");
   const [islogin, setIslogin] = useState(false);
+
+  //hook useEffect for Token
+
+ /*  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then((result) => {
+        console.log(result.data);
+        setPosts(result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []); */
 
   return (
     <div className="App">
@@ -38,14 +52,15 @@ const App = () => {
         <Routes>
           <Route path="/Register" element={<Register />} />
 
-          <Route path="/login" element={islogin === true ? <Dashbord /> : <Login  />} />
+          <Route
+            path="/login" element={ <Login />}
+          />
 
           <Route path="/addnewarticle" element={<AddArticle />} />
 
           <Route path="/dashbord" element={<Dashbord />} />
 
           <Route path="*" element={<p>Page Not Found</p>} />
-
         </Routes>
       </tokenContext.Provider>
     </div>
