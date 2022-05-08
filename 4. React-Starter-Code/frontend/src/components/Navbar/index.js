@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./style.css"
+import "./style.css";
+import { tokenContext } from "../../App";
+
 
 const Navbar = () => {
-    const navigate = useNavigate();
-    return (
-      
-      <div className="Nev" >
 
-      {<Link to="/Register/">Register</Link>}
+  const { islogin } = useContext(tokenContext);
 
-       {<Link to="/login">login</Link>}
+  const navigate = useNavigate();
 
-       {<Link to="/Dashboard">Dashboard</Link>}
+  return (
+    <div className="Navbar">
+    
+      {islogin === true ? (
+        <>
+          <Link to="/Dashboard">Dashboard</Link>
+          <Link to="/addnewarticle">Add New Article</Link>
+          <Link to="/Logout">Logout</Link>
+        </> ) : (<>
+        <Link to="/Register/">Register</Link>
+         <Link to="/login">login</Link>
+        </>)}
 
-       {<Link to="/Logout">Logout</Link>}
-   
-      </div>
-    );
-  };
-  
-  export default Navbar;
+    </div>
+  );
+};
+
+export default Navbar;

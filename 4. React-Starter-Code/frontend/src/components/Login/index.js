@@ -6,29 +6,32 @@ import { tokenContext } from "../../App";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { token, settoken, islogin, setIslogin, message, setMessage } =
+  const { token, setToken, islogin, setIslogin, message, setMessage } =
     useContext(tokenContext);
+
 
   const LogIN = () => {
     axios
       .post("http://localhost:5000/login/", {
-        email,
-        password,
+        email:email,
+        password:password,
       })
 
       .then((result) => {
-        console.log(result);
-        settoken(result.data.token);
+        // console.log(result.data.token);
+        localStorage.setItem("token", result.data.token);
+        setToken(localStorage.getItem("token"));
+        // console.log(islogin);
         setIslogin(true);
+        console.log(setIslogin);
+      }).catch((err)=>{
+        console.log(err.data);
       })
-      .catch((err) => {
-        console.log(err.response);
-        setMessage(err.response.data.message);
-        setIslogin(false);
-      });
+      
   };
 
   return (
+
     <div>
       <p>Login</p>
 

@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Dashbord from "./components/Dashboard";
 
+import AddArticle from "./components/AddArticle"
+
 export const tokenContext = createContext();
 
 const App = () => {
@@ -17,17 +19,33 @@ const App = () => {
 
   return (
     <div className="App">
-      <tokenContext.Provider value={{ token, setToken, login, isLoggedIn, message, setMessage ,islogin,setIslogin}}>
+      <tokenContext.Provider
+        value={{
+          token,
+          setToken,
+          login,
+          isLoggedIn,
+          message,
+          setMessage,
+          islogin,
+          setIslogin,
+        }}
+      >
         <h1>Welcome To APP</h1>
 
         <Navbar />
 
         <Routes>
-          <Route path="/dashbord" element={<Dashbord />} />
-
           <Route path="/Register" element={<Register />} />
 
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={islogin === true ? <Dashbord /> : <Login  />} />
+
+          <Route path="/addnewarticle" element={<AddArticle />} />
+
+          <Route path="/dashbord" element={<Dashbord />} />
+
+          <Route path="*" element={<p>Page Not Found</p>} />
+
         </Routes>
       </tokenContext.Provider>
     </div>

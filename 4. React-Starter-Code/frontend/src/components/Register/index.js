@@ -3,16 +3,15 @@ import axios from "axios";
 import "./style.css";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [country, setCountry] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
-
+  const [country, setCountry] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isRegistered, setIsReg] = useState(false);
-  const role = "626b6d93a63ed20d4ea34b10";
+  const role = "62770dcf7664d89ceea1ed97";
 
   const addUser = () => {
     axios
@@ -37,7 +36,7 @@ const Register = () => {
   };
   return (
     <div>
-      <p>Register</p>
+      <p>Register:</p>
 
       <br />
       <input
@@ -99,7 +98,6 @@ const Register = () => {
       <p className={isRegistered ? "successful" : "error Try Again"}>
         {message}
       </p>
-      
     </div>
   );
 };
